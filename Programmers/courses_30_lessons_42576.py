@@ -12,5 +12,5 @@ for i in participant:
 for j in completion:
     answer[j] -= 1
 for k in answer:
-    if answer[k]:
+    if answer[k] >= 1:
         print(k)

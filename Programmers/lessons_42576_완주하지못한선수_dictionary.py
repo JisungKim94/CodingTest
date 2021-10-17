@@ -1,6 +1,3 @@
-# https://programmers.co.kr/learn/courses/30/lessons/42576
-
-
 # participant = ["leo", "kiki", "eden"]
 participant = ["mislav", "stanko", "mislav", "ana"]
 # completion = ["eden", "kiki"]

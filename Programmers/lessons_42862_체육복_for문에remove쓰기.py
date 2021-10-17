@@ -25,9 +25,9 @@ reserve = [2, 3, 6]
 # n = 5
 # lost = [1, 2]
 # reserve = [2, 3]
-# n = 5
-# lost = [5, 4, 2]
-# reserve = [2, 4]
+n = 5
+lost = [4, 2]
+reserve = [3, 5]
 
 
 def solution(n, lost, reserve):
@@ -38,6 +38,8 @@ def solution(n, lost, reserve):
     # 따라서 아래와 같은 code를 사용해야 한다.
     # 아래와 같은 code를 사용하면, reserve[:]로 list를 복사해서
     # 사용하기 때문에 for문 조건으로 사용하는 r이 오류없이 돌아감
+    lost = sorted(lost)
+    reserve = sorted(reserve)
     for r in reserve[:]:
         if r in lost:
             reserve.remove(r)

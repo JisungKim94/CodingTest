@@ -21,45 +21,13 @@ def solution(genres, plays):
     # print(check_genres_sum)
     # print(check_genres)
 
-    temp_0 = check_genres_sum.pop(0)[0]
-    for idx, check_val in enumerate(check_genres):
-        if check_val[1] == temp_0:
-            answer.append(check_val[0])
-            if len(answer) == 2:
-                break
-
-    if len(check_genres_sum) == 0:
-        pass
-    else:
-        temp_1 = check_genres_sum.pop(0)[0]
-        if temp_0 == temp_1:
-            pass
-        else:
-            for idx, check_val in enumerate(check_genres):
-                if check_val[1] == temp_1:
-                    answer.append(check_val[0])
-                if len(answer) == 4:
-                    break
-
-    if len(check_genres_sum) == 0 or (temp_0 == temp_1):
-        pass
-    else:
-        temp_2 = check_genres_sum.pop(0)[0]
+    for genres_sum in check_genres_sum:
+        temp_0 = genres_sum[0]
+        cnt = 0
         for idx, check_val in enumerate(check_genres):
-            if check_val[1] == temp_2:
+            if check_val[1] == temp_0 and cnt < 2:
                 answer.append(check_val[0])
-            if len(answer) == 4:
-                break
-
-    if len(check_genres_sum) == 0 or (temp_0 == temp_1):
-        pass
-    else:
-        temp_2 = check_genres_sum.pop(0)[0]
-        for idx, check_val in enumerate(check_genres):
-            if check_val[1] == temp_2:
-                answer.append(check_val[0])
-            if len(answer) == 4:
-                break
+                cnt = cnt + 1
 
     print(answer)
     return answer

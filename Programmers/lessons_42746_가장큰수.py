@@ -5,8 +5,10 @@ def solution(numbers):
     for i, v in enumerate(numbers):
         temp_0.append([str(v), i])
     for i, v in enumerate(temp_0):
-        length = len(v[0])
-        v[0] = v[0] + v[0] * (4 - length)
+        num_str = v[0]
+        while len(v[0]) < 12:
+            v[0] = v[0] + num_str
+        v[0] = int(v[0])
     # print(temp_0)
     temp_0 = sorted(temp_0, reverse=True)
     # print(temp_0)
@@ -22,5 +24,5 @@ def solution(numbers):
 
 
 # print(solution([6, 10, 2]))
-# print(solution([67, 676, 677]))  # 67767676
-print(solution([0, 0, 0, 0]))
+print(solution([67, 676, 677]))  # 67767676
+# print(solution([0, 0, 0, 0]))

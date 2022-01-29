@@ -2,8 +2,10 @@ import collections
 
 
 def solution(priorities, location):
-    stack_0 = collections.deque(priorities)
-    stack_1 = collections.deque(range(len(priorities)))
+    # stack_0 = collections.deque(priorities)
+    # stack_1 = collections.deque(range(len(priorities)))
+    stack = [(i, p) for i, p in enumerate(priorities)]
+    stack = collections.deque(stack)
     # 위에껄 한방에 하려면
     # stack = [(i, p) for i, p in enumerate(priorities)]
     # 대신 이렇게 하려면 while문 안에 if문에 max를 못 쓰는데..
@@ -13,16 +15,16 @@ def solution(priorities, location):
     # empty거나 all False면 False 반납
     answer = 0
     # print(stack_1)
-    while stack_0:
-        cur_0 = stack_0.popleft()
-        cur_1 = stack_1.popleft()
+    while stack:
+        # cur_0 = stack_0.popleft()
+        # cur_1 = stack_1.popleft()
+        cur = stack.popleft()
         try:
-            if cur_0 < max(stack_0):
-                stack_0.append(cur_0)
-                stack_1.append(cur_1)
+            if any(cur[1] < s[1] for s in stack):
+                stack.append(cur)
             else:
                 answer = answer + 1
-                if cur_1 == location:
+                if cur[0] == location:
                     # print(answer)
                     break
         except ValueError:
@@ -33,7 +35,7 @@ def solution(priorities, location):
     return answer
 
 
-# print(solution([2, 1, 3, 2], 2))
+print(solution([2, 1, 3, 2], 2))
 print(solution([2, 1, 0, 2], 2))
-# print(solution([1, 1, 9, 1, 1, 1], 0))
-# print(solution([9, 9, 1, 9, 9, 9], 2))
+print(solution([1, 1, 9, 1, 1, 1], 0))
+print(solution([9, 9, 1, 9, 9, 9], 2))

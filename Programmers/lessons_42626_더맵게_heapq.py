@@ -14,12 +14,21 @@ import heapq
 # +alpha) 파이썬 heapq는 최소 힙으로 구성되어 있으므로 최대 힙을 만드려면
 # 트릭이 필요하다. -1과 (-item, item) 튜플 형식의 트릭
 #
-# heap_items = [1,3,5,7,9]
+# import heapq
+
+# heap_items = [-1, -1, -3, 0, 0, 5, 5, 7, 9]
 # max_heap = []
 # for item in heap_items:
-#   heapq.heappush(max_heap, -item, item))
+#     heapq.heappush(max_heap, (-item, item))
 # print(max_heap)
 # max_item = heapq.heappop(max_heap)[1]
+# print(max_item)
+
+# max_heap_2 = []
+# for item in heap_items:
+#     heapq.heappush(max_heap_2, -item)
+# print(max_heap_2)
+# max_item = -heapq.heappop(max_heap_2)
 # print(max_item)
 ############################################################################
 

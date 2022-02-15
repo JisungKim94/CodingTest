@@ -1,4 +1,5 @@
-temp = str("hot")
-
-for i in temp:
-    print(i)
+print(len("abcabcabcabcdededededede"))
+print(len("abcabcabcabc6de"))
+print(len("4abcdededededede"))
+print(len("abcabcabcabc3dede"))
+print(len("2abcabc2dedede"))

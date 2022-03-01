@@ -1,5 +1,10 @@
-print(len("abcabcabcabcdededededede"))
-print(len("abcabcabcabc6de"))
-print(len("4abcdededededede"))
-print(len("abcabcabcabc3dede"))
-print(len("2abcabc2dedede"))
+v = list(range(10))
+
+for i in v:
+    if i == 5:
+        print(i)
+    else:
+        print("NO")
+
+
+print([i if i == 5 else "NO" for i in v])

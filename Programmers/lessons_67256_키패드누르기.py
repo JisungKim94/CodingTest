@@ -26,7 +26,7 @@ def solution(numbers, hand):
                     L_pre = i
 
     answer = "".join(answer)
-    print(answer)
+    # print(answer)
     return answer
 
 

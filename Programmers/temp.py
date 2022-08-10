@@ -1,6 +1,6 @@
-a = 1
-b = 1
-c = 1
-d = 1
+import heapq
 
-print((a | b | c | d))
+heap = []
+heapq.heappush(heap, [0, 1])  # 거리,노드
+
+print(heap)

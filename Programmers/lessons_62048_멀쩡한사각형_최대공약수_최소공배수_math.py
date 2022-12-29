@@ -1,6 +1,7 @@
 import math
 
-
+# 참고로 최소공배수는 lcm
+# gcd : 최대공약수
 def solution(w, h):
     answer = -1
     gcd_ = math.gcd(w, h)

@@ -6,7 +6,7 @@
 #     if q == 0:
 #         return tmp[r]
 #     else:
-#         return convert(q) + tmp[r]
+#         return convert(q, base) + tmp[r]
 # 뒤집기 : arr[::-1]
 # n진법 -> 10진법 : int(num, n)
 

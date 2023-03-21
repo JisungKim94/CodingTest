@@ -27,8 +27,8 @@ def solution(land):
             land[i][j] = land[i][j] + max(land[i - 1])
             land[i - 1][j] = temp
 
-    # print(land)
     answer = max(land[-1])
+    print(answer)
 
     return answer
 

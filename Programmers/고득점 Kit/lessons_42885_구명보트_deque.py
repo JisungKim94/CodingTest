@@ -5,7 +5,7 @@ def solution(people, limit):
     # 문제 잘 읽어봐야 함... 보트가 작아서 두 명 밖에 못탄대
     # 쓰벌
     #
-    # 쥰내 신기하게도 그냥 list 쓰면 시간초과 뜨고 deque 사용해서 pop(0) 대신 popleft 사용하면 시간초과 안뜨네
+    # 신기하게도 그냥 list 쓰면 시간초과 뜨고 deque 사용해서 pop(0) 대신 popleft 사용하면 시간초과 안뜨네
     #
     answer = 0
     people = sorted(people)

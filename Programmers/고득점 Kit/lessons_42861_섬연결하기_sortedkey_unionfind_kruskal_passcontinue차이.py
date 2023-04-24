@@ -23,8 +23,9 @@ class union:
 
     def union(self, x, y):
         x, y = self.find(x), self.find(y)
-
         if x == y:
+            # 사실상 여기 오면 cycle 형성이라는 말이라서
+            # continue에 의해 여기 걸리진 않는다.
             return
         else:
             self.root[y] = x
@@ -42,7 +43,8 @@ class union:
 def solution(n, costs):
     answer = 0
     disjointset = union(n)
-    route = []
+    # route = []
+    # 간선들의 가중치 오름차순 정렬
     costs = sorted(costs, key=lambda x: x[2])
 
     for cost in costs:
@@ -52,12 +54,44 @@ def solution(n, costs):
             # cose[1]의 꼭대기에도 0이 있다면 얘내 둘이 연결되면 cycle이 생김
             continue
         disjointset.union(cost[0], cost[1])
-        route.append((cost[0], cost[1]))
+        # route.append((cost[0], cost[1]))
         answer += cost[2]
 
     # print(disjointset.root)
     # print(route)
     # print(answer)
+    return answer
+
+
+# class 없는 답
+def solution(n, costs):
+    answer = 0
+    root = list(range(n))
+    # route = []
+    # 간선들의 가중치 오름차순 정렬
+    costs = sorted(costs, key=lambda x: x[2])
+
+    def union(x, y, root):
+        x, y = find(x, root), find(y, root)
+        root[y] = x
+
+    def find(index, root):
+        if index == root[index]:
+            return index
+        else:
+            root[index] = find(root[index], root)
+            return root[index]
+
+    for cost in costs:
+        if find(cost[0], root) == find(cost[1], root):
+            # cycle이 형성되면 그 node를 route에 추가하지 않는다.
+            # 예를들어 cost[0]의 꼭대기에 0이 있는데
+            # cose[1]의 꼭대기에도 0이 있다면 얘내 둘이 연결되면 cycle이 생김
+            continue
+        union(cost[0], cost[1], root)
+        # route.append((cost[0], cost[1]))
+        answer += cost[2]
+
     return answer
 
 

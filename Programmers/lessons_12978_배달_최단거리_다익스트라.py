@@ -1,16 +1,18 @@
 import heapq
 
+# 참고로 꼭 최소힙을 사용 할 필요는 없고 deque나 list를 사용해도 됨
+
 
 def dijkstra(dist, adj):
     # 출발노드를 기준으로 각 노드들의 최소비용 탐색
     heap = []
-    heapq.heappush(heap, [0, 1])  # 거리,노드
+    heap.append([0, 1])  # 거리,노드
     while heap:
-        cost, node = heapq.heappop(heap)
+        cost, node = heap.pop()
         for c, n in adj[node]:
             if cost + c < dist[n]:
                 dist[n] = cost + c
-                heapq.heappush(heap, [cost + c, n])
+                heap.append([cost + c, n])
 
 
 def solution(N, road, K):
@@ -22,8 +24,8 @@ def solution(N, road, K):
     adj = [[] for _ in range(N + 1)]  # 거리&노드 기록할 배열
     for r in road:
         # 양방향 통행이 가능하므로 두쪽 다 넣어줌
-        adj[r[0]].append([r[2], r[1]])
-        adj[r[1]].append([r[2], r[0]])
+        adj[r[0]].append([r[2], r[1]])  # r[0]번 마을은 r[1]번 마을과 r[2]의 거리
+        adj[r[1]].append([r[2], r[0]])  # r[1]번 마을은 r[0]번 마을과 r[2]의 거리
 
     # 이제 위 준비과정이 끝났으니 다익스트라 구현
     # https://blog.naver.com/PostView.naver?blogId=ndb796&logNo=221234424646&redirect=Dlog&widgetTypeCall=true&directAccess=false

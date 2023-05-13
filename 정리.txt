@@ -48,6 +48,10 @@ l, r로 two pointer 사용하고 조건을 만족할 때 temp_r을 저장한 상
 4) 통과한 사람 수 += mid//time , for time in times
 5) 통과한 사람 수 >= n end = mid, 통과한 사람 수 < n start = mid + 1
 
+6) 이게 핵심인데.. start,end가 정해진 구간이 모두 조건을 만족한다면, e.g.) 28과 29는 모두 n = 6임
+우리는 int로 값을 내리고 있으므로 end에 mid를 넣고 start에 mid+1을 업데이트 해 줘야 전체 검색이 가능하다.
+
+
 # comment
 이분탐색인걸 알 면 쉽지만 그렇지 않은 경우 풀기 짱 어렵고 시간만 버릴 가능성이 큼
 
@@ -172,8 +176,7 @@ for cost in costs:
 
 # ======================================================================================== #
 
-# 12978 배달 dijkstra algorithm, inf 초기화, 2차원 배열 만들기, heapq.heappush(heap, [0, 1])
-heapq.heappop(heap)
+# 12978 배달 dijkstra algorithm, inf 초기화, 2차원 배열 만들기
 # keyword
 N개의 마을로 이루어진 나라, 양방향통행 도로, 음식 배달 K시간 이내
 

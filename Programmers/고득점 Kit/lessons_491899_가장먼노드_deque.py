@@ -27,6 +27,7 @@ def solution(n, vertex):
             # 3번 노드에서 확인해 볼 애들은 연결되어(graph에 있는)있는 6,4,2,1 중 6,4
             # 왜냐? 1에서 왔으니까 1은 빼고 최단거리니까 1에서 가볼 수 있었던 2도 빼야댐 즉 6,4만 확인
             # if visited[i] == 0: 에서 이 알고리즘이 적용
+            # visited[i] = visited[node] + 1 에선 전 노드까지 걸린 길이를 누적 해 주는부분임 총 거리를 나타냄
             if visited[i] == 0:
                 queue.append(i)
                 visited[i] = visited[node] + 1

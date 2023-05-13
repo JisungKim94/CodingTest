@@ -2,6 +2,7 @@
 # 이 때 이분탐색을 이용하는 문제임
 def solution(n, times):
     answer = 0
+    times.sort()
     start, end, mid = 1, times[-1] * n, 0
 
     while start < end:

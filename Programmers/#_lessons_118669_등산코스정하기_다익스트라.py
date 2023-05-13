@@ -1,7 +1,7 @@
 from collections import defaultdict
 from heapq import heappop, heappush
 
-
+# https://techblog-history-younghunjo1.tistory.com/248
 def dijkstra(n, adj, gates, summits_set):
     # 2) heap 만들기
     pq = []  # (cost, 현재 위치)

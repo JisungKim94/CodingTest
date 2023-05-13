@@ -1,7 +1,5 @@
 import heapq
 
-# 참고로 꼭 최소힙을 사용 할 필요는 없고 deque나 list를 사용해도 됨
-
 
 def dijkstra(dist, adj):
     # 출발노드를 기준으로 각 노드들의 최소비용 탐색
@@ -28,7 +26,7 @@ def solution(N, road, K):
         adj[r[1]].append([r[2], r[0]])  # r[1]번 마을은 r[0]번 마을과 r[2]의 거리
 
     # 이제 위 준비과정이 끝났으니 다익스트라 구현
-    # https://blog.naver.com/PostView.naver?blogId=ndb796&logNo=221234424646&redirect=Dlog&widgetTypeCall=true&directAccess=false
+    # https://techblog-history-younghunjo1.tistory.com/248
     dijkstra(dist, adj)
 
     return len([i for i in dist if i <= K])

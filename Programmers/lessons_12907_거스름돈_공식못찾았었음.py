@@ -4,7 +4,9 @@ def solution(n, money):
 
     for i in money:
         for j in range(i, n + 1):
-            if j >= i:
-                temp[j] = temp[j] + temp[j - i]
+            temp[j] = temp[j] + temp[j - i]
 
     return temp[-1] % 1000000007
+
+
+print(solution(10, [1, 2, 5]))

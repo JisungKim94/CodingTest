@@ -23,7 +23,7 @@ def solution(maps):
 
         while q:
             cost, (x, y) = heapq.heappop(q)
-            if cost < dist[y][x]:
+            if cost > dist[y][x]:
                 continue
             for dx, dy in d:
                 nextx, nexty = x + dx, y + dy

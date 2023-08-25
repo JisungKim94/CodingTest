@@ -1,8 +1,5 @@
 import collections
 
-n = 6
-vertex = [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]]
-
 
 def solution(n, vertex):
     answer = 0
@@ -39,4 +36,51 @@ def solution(n, vertex):
     return answer
 
 
-solution(n, vertex)
+# 위에는 당시에 풀었던 풀이고
+# 아래는 다익스트라를 이용한 내 풀이
+# 이거 풀 때
+#         for next_node in graph[node]:
+#            if cost+1<dist[next_node]:
+# 이거를
+#         for next_node in graph[node]:
+#            if cost<dist[next_node]:
+# 이걸로 해서 틀렸었음;;;
+import heapq
+import collections
+
+
+def dijstra(graph, n):
+    heap = []
+    dist = [float("inf")] * (n + 1)
+    dist[0] = 0
+    dist[1] = 0
+    heapq.heappush(heap, (0, 1))
+
+    while heap:
+        cost, node = heapq.heappop(heap)
+
+        if dist[node] < cost:
+            continue
+
+        for next_node in graph[node]:
+            if cost + 1 < dist[next_node]:
+                dist[next_node] = cost + 1
+                heapq.heappush(heap, (cost + 1, next_node))
+
+    return dist
+
+
+def solution(n, vertex):
+    answer = 0
+    graph = collections.defaultdict(list)
+    for v0, v1 in vertex:
+        graph[v0].append(v1)
+        graph[v1].append(v0)
+
+    tmp = dijstra(graph, n)
+    answer = tmp.count(max(tmp))
+
+    return answer
+
+
+solution(6, [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]])

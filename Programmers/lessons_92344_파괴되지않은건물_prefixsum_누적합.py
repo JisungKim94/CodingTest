@@ -42,15 +42,15 @@ def solution(board, skill):
     # print(temp)
 
     # 행 기준 누적합
-    for i in range(len(temp) - 1):
-        for j in range(len(temp[0]) - 1):
-            temp[i][j + 1] += temp[i][j]
+    for r in range(len(temp) - 1):
+        for c in range(len(temp[0]) - 1):
+            temp[r][c + 1] += temp[r][c]
         print(temp)
     print()
     # 열 기준 누적합
-    for j in range(len(temp[0]) - 1):
-        for i in range(len(temp) - 1):
-            temp[i + 1][j] += temp[i][j]
+    for c in range(len(temp[0]) - 1):
+        for r in range(len(temp) - 1):
+            temp[r + 1][c] += temp[r][c]
         print(temp)
     print()
     # print(temp)
@@ -61,7 +61,7 @@ def solution(board, skill):
             board[i][j] += temp[i][j]
             if board[i][j] > 0:
                 answer += 1
-
+    print(board)
     return answer
 
 
@@ -79,7 +79,7 @@ def solution(board, skill):
 #             [1, 1, 1, 3, 3, 1],
 #         ],
 #     )
-#     == 10
+#     == 25
 # )
 print(
     solution(

@@ -1,86 +1,3 @@
-""" 
-전체 탐색으론 아무리 효율성을 높여도 풀 수 없다.
-two pointer라는 개념을 사용해야 하는데 map 구조를 이용하면 되고
-python에선 map을 dictionary로 구성하기 때무넹 쉽게 만들 수 있따.
-
-처음에 two pointer 개념을 생각하긴 했는데, map, dictionary를 사용 해
-구현할 방법을 몰라서 못 품
-"""
-
-""" import collections
-
-
-def solution(gems):
-    set_gems = set(gems)
-    # print("set_gems =", set_gems)
-    for checkingLength in range(len(set_gems), len(gems) + 1):
-        tmp_gems = collections.deque(gems[0:checkingLength])
-        print(checkingLength, tmp_gems)
-        for Starting in range(0, len(gems) + 1 - checkingLength):
-            print(Starting, Starting + checkingLength - 1)
-
-            # tmp_gems = set(gems[Starting : Starting + checkingLength])
-            brk = True
-            for k in set_gems:
-                # print(k not in gems[Starting : Starting + checkingLength])
-                if k not in tmp_gems:
-                    brk = False
-                    break
-                else:
-                    pass
-            if brk:
-                print(set_gems, tmp_gems)
-                return [Starting + 1, Starting + checkingLength]
-            else:
-                if len(gems) <= Starting + checkingLength:
-                    continue
-                tmp_gems.popleft()
-                tmp_gems.append(gems[Starting + checkingLength])
- """
-
-""" 투 포인터 사용했지만, 모든 보석 key를 사용해서 시간초과
-시간초과 막으려면 보고 있는 보석만 key에 남겨두고 del 시켜줘야 함"""
-# def solution(gems):
-#     answer = []
-#     gems_set = set(gems)
-
-#     l = 0
-#     r = 0
-#     gems_dic = {}
-#     for i in gems_set:
-#         gems_dic[i] = 0
-#     gems_dic[gems[0]] = 1
-
-#     while 1:
-#         while 1:
-#             if min(gems_dic.values()) > 0:
-#                 answer.append((l, r))
-#                 break
-#             else:
-#                 if r < len(gems) - 1:
-#                     r = r + 1
-#                     gems_dic[gems[r]] = gems_dic[gems[r]] + 1
-#                 else:
-#                     break
-
-#         gems_dic[gems[l]] = gems_dic[gems[l]] - 1
-
-#         if l < len(gems) - len(gems_set):
-#             l = l + 1
-#         else:
-#             break
-
-#         if min(gems_dic.values()) > 0:
-#             answer.append((l, r))
-#         else:
-#             pass
-
-#     answer = sorted(answer, key=lambda x: (x[1] - x[0]))
-#     # print(answer)
-#     # print([answer[0][0] + 1, answer[0][1] + 1])
-#     return [answer[0][0] + 1, answer[0][1] + 1]
-
-
 def solution(gems):
     answer = [0, len(gems)]
     size = len(set(gems))
@@ -112,6 +29,43 @@ def solution(gems):
                 gem_dict[gems[r]] = 1
 
     return [answer[0] + 1, answer[1] + 1]
+
+
+# 두번째풀이 dict pop을 몰랐어서 del을 사용했는데 어캐 잘 풀었다.
+# dict.pop(i,None)을 공부하자
+# if문 조건을 gemsets == dic.keys() 이걸로 했다가 시간초과가 났었는데 찾기 좀 힘들었음
+# if len(gemsets) == len(dic.keys()): 이걸로 바꾸면 된다.
+
+
+def solution(gems):
+    answer = []
+    gemsets = set(gems)
+    dic = {}
+    l, r = 0, -1
+    minleng = 100001
+    while l < len(gems):
+        # if check(dic,gemsets):
+        if len(gemsets) == len(dic.keys()):
+            dic[gems[l]] = dic.get(gems[l], 0) - 1
+            if dic.get(gems[l], 0) == 0:
+                del dic[gems[l]]
+            if minleng >= r - l:
+                minleng = r - l
+                answer.append([l, r])
+            l += 1
+        else:
+            if r >= len(gems) - 1:
+                if dic.get(gems[l], 0) > 0:
+                    dic[gems[l]] -= 1
+                l += 1
+            else:
+                r += 1
+                dic[gems[r]] = dic.get(gems[r], 0) + 1
+        # print(dic,l,r)
+    # print(answer)
+    answer.sort(key=lambda x: ((x[1] - x[0]), x[0]))
+    answer = [answer[0][0] + 1, answer[0][1] + 1]
+    return answer
 
 
 print(

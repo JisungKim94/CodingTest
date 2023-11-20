@@ -5,31 +5,30 @@ def solution(genres, plays):
 
     # 딕셔너리 사용법
     for idx, val in enumerate(genres):
+        # zip 수동으로 사용
         check_genres.append([idx, genres[idx], plays[idx]])
+        # 장르별 재생횟수
         if val not in check_genres_sum:
             check_genres_sum[val] = plays[idx]
         else:
             check_genres_sum[val] = check_genres_sum[val] + plays[idx]
-    # print(check_genres_sum)
-    # print(check_genres)
+
     # 딕셔너리 정렬 어캐 하게~?
     # https://codechacha.com/ko/python-sorting-dict/
     check_genres_sum = sorted(
         check_genres_sum.items(), key=lambda item: item[1], reverse=1
     )
-    check_genres = sorted(check_genres, key=lambda item: item[2], reverse=1)
-    # print(check_genres_sum)
-    # print(check_genres)
+    # 하나는 오름차 하나는 내림차일 경우
+    check_genres = sorted(check_genres, key=lambda x: (x[2], -x[0]), reverse=1)
+    # print(check_genres,check_genres_sum)
 
-    for genres_sum in check_genres_sum:
-        temp_0 = genres_sum[0]
+    for cgs in check_genres_sum:
         cnt = 0
-        for idx, check_val in enumerate(check_genres):
-            if check_val[1] == temp_0 and cnt < 2:
-                answer.append(check_val[0])
-                cnt = cnt + 1
+        for cg in check_genres:
+            if cgs[0] == cg[1] and cnt < 2:
+                cnt += 1
+                answer.append(cg[0])
 
-    print(answer)
     return answer
 
 

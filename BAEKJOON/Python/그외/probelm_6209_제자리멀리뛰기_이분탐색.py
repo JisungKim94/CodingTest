@@ -3,9 +3,9 @@
 # 일반적 방법은 구한 값을 바로 반환하고
 # lower/upper bound는 원하는 값보다 처음으로 크거나 작은 값이 나오는 위치를 찾는 방법
 # https://woongsios.tistory.com/131
-# 일반적 방법 -> while l<=r, if target <= arr[mid]: l=m+1, else: r=m-1
-# lower bound -> while l<r, if target <= arr[mid]: l=m+1, else: r=m
-# upper bound -> while l<r, if target < arr[mid]: l=m+1, else: r=m
+# 일반적 방법 -> while l<=r, if target <= arr[mid]: r=m-1, else: l=m+1
+# lower bound -> while l<r, if target <= arr[mid]: r=m, else: l=m+1
+# upper bound -> while l<r, if target < arr[mid]: r=m, else: l=m+1
 
 import sys
 input = sys.stdin.readline

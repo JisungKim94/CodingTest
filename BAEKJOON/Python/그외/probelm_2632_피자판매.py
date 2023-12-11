@@ -11,7 +11,6 @@ answer=0
 # print(pizzaA,pizzaB)
 
 caseA = collections.defaultdict(int)
-
 for i in range(A):
     # print(pizzaA)
     tmp = 0
@@ -29,7 +28,6 @@ caseA[sum(pizzaA)] = 1
 caseA[0]=1
 
 caseB = collections.defaultdict(int)
-
 for i in range(B):
     # print(pizzaB)
     tmp = 0

@@ -6,10 +6,19 @@
 
 import sys
 
-def find_parent(parent, x):
+def find_parent(x):
+    while x != parent[x]:
+        x = parent[x]
+    return x
 # 작성
 
-def union(parent, a, b):
+def union(a, b):
+    a = find_parent(a)
+    b = find_parent(b)
+    if a<b:
+        parent[b]=a
+    else:
+        parent[a]=b
 # 작성
 
 input = sys.stdin.readline
@@ -18,11 +27,11 @@ parent = list(range(n))
 
 for i in range(m):
     x, y = map(int, input().split())
-    if find_parent(parent, x) == find_parent(parent, y):  # 사이클 발생시
+    if find_parent(x) == find_parent(y):  # 사이클 발생시
         print(i + 1)
         break
-    union(parent, x, y)  # 점 잇기
-    print(parent)
+    union(x, y)  # 점 잇기
+    # print(parent)
 else:  # m번의 차례를 모두 처리한 이후에도 종료되지 않았다면
     print(0)
 

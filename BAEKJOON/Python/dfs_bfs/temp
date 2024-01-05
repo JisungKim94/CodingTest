@@ -1,0 +1,40 @@
+def can_be_piled(lowerstone, lowerwlh, upperstone, upperwlh, stones):
+    lower = [stones[lowerstone][m] for m in range(3) if m != lowerwlh]
+    upper = [stones[upperstone][m] for m in range(3) if m != upperwlh]
+    if max(lower) > max(upper) and min(lower) > min(upper):
+        return True
+    return False
+
+def dyprog(lowerstone, lowerwlh, stones, dp):
+    if dp[lowerstone][lowerwlh] != 0:
+        return dp[lowerstone][lowerwlh]
+    
+    ans = stones[lowerstone][lowerwlh]
+    for upperstone in range(n):
+        for upperwlh in range(3):
+            if can_be_piled(lowerstone, lowerwlh, upperstone, upperwlh, stones):
+                ans = max(ans, dyprog(upperstone, upperwlh, stones, dp) + stones[lowerstone][lowerwlh])
+    
+    dp[lowerstone][lowerwlh] = ans
+    return ans
+
+if __name__ == "__main__":
+    case = 0
+    while True:
+        n = int(input())
+        if n == 0:
+            break
+        
+        maxh = 0
+        stones = [[0] * 3 for _ in range(n)]
+        dp = [[0] * 3 for _ in range(n)]
+        
+        for i in range(n):
+            stones[i] = list(map(int, input().split()))
+        
+        for i in range(n):
+            for j in range(3):
+                maxh = max(maxh, dyprog(i, j, stones, dp))
+        
+        case += 1
+        print(f"Case {case}: maximum height = {maxh}")

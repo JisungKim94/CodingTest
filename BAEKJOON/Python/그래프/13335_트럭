@@ -1,0 +1,34 @@
+import sys
+from collections import deque
+
+# 큐 문제네..
+# 생각보다 구현이 잘 안됐었다.
+
+input = sys.stdin.readline
+sys.setrecursionlimit(10 ** 8)
+n, w, L = map(int, input().split())
+truck = list(map(int, input().split()))
+# print(truck)
+
+import collections
+bridge = collections.deque([])
+counter = collections.deque([])
+truck = collections.deque(truck)
+cnt=0
+while truck or bridge:
+    # print(truck)
+    # print(bridge)
+    # print(cnt,counter)
+    # print()
+    if bridge:
+        if cnt-counter[0]>=w:
+            bridge.popleft()
+            counter.popleft()
+        if truck and sum(bridge)+truck[0]<=L and len(bridge)<w:
+            bridge.append(truck.popleft())
+            counter.append(cnt)
+    else:
+        bridge.append(truck.popleft())
+        counter.append(cnt)
+    cnt+=1
+print(cnt)

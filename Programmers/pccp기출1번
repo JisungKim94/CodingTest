@@ -1,0 +1,30 @@
+import collections
+def solution(bandage, health, attacks):
+    answer = 0
+    times = range(1001)
+    attacks = collections.deque(attacks)
+    conti = -1
+    maxheal = health
+    for t in times:
+        conti+=1
+        if bandage[0]==conti:
+            heal = bandage[1] + bandage[2]
+            conti = 0
+        else:
+            heal = bandage[1]
+        if t == attacks[0][0]:
+            heal = -attacks[0][1]
+            conti = 0
+            attacks.popleft()
+        
+        health+=heal
+        health=min(maxheal,health)
+        if health<=0:
+            return -1
+        if attacks:
+            # print(t,health,heal,conti,attacks[0])
+            pass
+        else:
+            break
+    answer = health
+    return answer

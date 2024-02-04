@@ -1,0 +1,80 @@
+from collections import deque
+
+hands = deque()
+
+def checkCard(cases, idx, checker):
+    global coincnt
+    for i in range(len(hands)):
+        card = hands.popleft()
+
+        if checker[idx + 1 - card] != 0:
+            if cases == 0: # 두 장 다 버림
+                if checker[idx + 1 - card] != 1 or checker[card] != 1:
+                    # hands에 없던애면 hands에 넣어줘
+                    hands.append(card)
+                    continue
+                checker[card] = 0
+                checker[idx + 1 - card] = 0
+                return True
+            elif cases == 1:
+                if (checker[idx + 1 - card] == 1 and checker[card] == 2 and coincnt > 0 or
+                        checker[idx + 1 - card] == 2 and checker[card] == 1 and coincnt > 0):
+                    coincnt -= 1
+                    checker[card] = 0
+                    checker[idx + 1 - card] = 0
+                    return True
+            elif cases == 2:
+                if checker[idx + 1 - card] == 2 and checker[card] == 2 and coincnt > 1:
+                    coincnt -= 2
+                    checker[card] = 0
+                    checker[idx + 1 - card] = 0
+                    return True
+
+        # 확인하려고 pop했던 카드가 위의 조건 만족했다면 더 이상 내 손에 업성야 하므로 아래 어펜드는 수행이 안되게 된다.
+        hands.append(card)
+
+    return False
+
+def solution(coin, cards):
+    global coincnt
+    coincnt = coin
+    answer = 0
+    idx = len(cards)
+    checker = [0] * 1001
+    index = idx // 3
+    # checker와 핸드에 있는걸 별개로 봐야 풀림..
+
+    for i in range(idx // 3):
+        hands.append(cards[i])
+        # checker == 1 : 첨에 받은애
+        checker[cards[i]] = 1
+
+    while True:
+        answer += 1
+
+        if index >= len(cards) - 1:
+            break
+
+        # checker == 2 : checker해서 생긴 애
+        checker[cards[index]] = 2
+        checker[cards[index + 1]] = 2
+        hands.append(cards[index])
+        hands.append(cards[index + 1])
+        index += 2
+        # 아몰랑 일단 손이랑 checker에 추가하고,
+        
+        # 그다음 체크시작
+        if checkCard(0, idx, checker):
+            continue
+        if coin > 0:
+            if checkCard(1, idx, checker):
+                continue
+            if checkCard(2, idx, checker):
+                continue
+
+
+        break
+
+    return answer
+
+print(solution(4, [3, 6, 7, 2, 1, 10, 5, 9, 8, 12, 11, 4]))

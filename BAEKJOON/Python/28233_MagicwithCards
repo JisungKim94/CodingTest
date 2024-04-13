@@ -1,0 +1,44 @@
+import sys
+input = sys.stdin.readline
+n,i,j = map(int, input().split())
+
+# Riffle: Divide the cards into two parts⟨c1, c2, ..., cn⟩ and ⟨cn+1, ..., c2n⟩ and produce 
+# ⟨c1, cn+1, c2, cn+2, ..., cn, c2n⟩.
+
+# Scuffle: From ⟨c1, c2, ..., c2n⟩, produce ⟨c2, c1, c4, c3, ..., c2n, c2n-1⟩.
+
+# Help Mahsa find out the minimum number of shuffles she needs, and she’ll figure out the rest.
+
+def Riffle(i):
+    if i <= n:
+        i = i*2 - 1
+    else:
+        i = (i%n)*2
+    return i
+def Scuffle(i):
+    if i%2 == 0:
+        i-=1
+    else:
+        i+=1
+    return i
+import heapq
+heapqque = [(0,i)]
+visited = [0]*(2*n+1)
+visited[i] = 1
+answer = -1
+while heapqque:
+    # print(heapqque)
+    cnt,i = heapq.heappop(heapqque)
+    if i == j:
+        answer = cnt
+        break
+    i_R = Riffle(i)
+    i_S = Scuffle(i)
+    if visited[i_R] == 0 and i_R > 0:
+        heapq.heappush(heapqque,(cnt+1,i_R))
+        visited[i_R] = 1
+    if visited[i_S] == 0 and i_S > 0:
+        heapq.heappush(heapqque,(cnt+1,i_S))
+        visited[i_S] = 1
+
+print(answer)

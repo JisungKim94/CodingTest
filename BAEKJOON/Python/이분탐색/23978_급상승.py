@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+# 한 번 꼬은 이분탐색일듯
 
 N,K = map(int, input().split())
 days = list(map(int, input().split()))

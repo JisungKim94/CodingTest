@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug with CodeLLDB",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "cwd": "${workspaceFolder}",
+      "stopOnEntry": false,
+      "stdio": ["${fileDirname}/${fileBasenameNoExtension}_input.txt", null, null]
+    }
+  ]
+}
